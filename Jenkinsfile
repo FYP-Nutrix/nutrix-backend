@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                sh 'ssh ssh nutrixadmin@20.212.130.228 "source env/bin/activate; \
+                sh 'ssh -o StrictHostKeyCHecking=no nutrixadmin@20.212.130.228 "source env/bin/activate; \
                 cd nutrix-backend \
                 git pull origin master; \
                 pip install -r requirements.txt --no-warn-script-location; \
