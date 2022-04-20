@@ -3,17 +3,17 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                echo 'build'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Test') { 
             steps {
-                echo 'test'
+                echo 'python manage.py test'
             }
         }
         stage('Deploy') { 
             steps {
-                echo 'deploy'
+                sh 'echo deploying'
             }
         }
     }
