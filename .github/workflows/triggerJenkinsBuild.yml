@@ -27,7 +27,7 @@ jobs:
       
       #jenkins
       - name: Trigger Jenkins
-        uses: nutrix-backend/jenkins-action@master
+        uses: fyp-nutrix/nurix-backend@master
         with:
           url: "http://jenkins-server-nutrix.southeastasia.cloudapp.azure.com:8080/"
           user: "jenkins"
