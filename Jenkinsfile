@@ -15,7 +15,11 @@ pipeline {
             steps {
                 sh 'ssh -o StrictHostKeyCHecking=no nutrixadmin@20.198.225.83 "cd nutrix-backend \
                 source env/bin/activate; \
-                git status " '
+                git pull origin master; \
+                pip install -r requirements.txt --no-warn-script-location; \
+                python3 manage.py migrate; \
+                sudo systemctl restart nginx; \
+                sudo systemctl restart gunicorn " '
             }
         }
     }
