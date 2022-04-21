@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-gex2rrei*o0qj197bab2(^o(&(3frjaw(hh!67_ur@haarc(tc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','0.0.0.0']
 
 
 # Application definition
@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'django_jenkins',
 ]
 
 MIDDLEWARE = [
@@ -77,13 +76,8 @@ WSGI_APPLICATION = 'nutrix_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_DB'),
-        'PORT': 5432,
-        'OPTIONS': {'sslmode': 'require'},
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
 
@@ -143,8 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #jenkins
 PROJECT_APPS = [
     'nutrix-backend'
-]
-JENKINS_TASKS = [
-    'django_jenkins.tasks.run_pep8',
-    'django_jenkins.tasks.run_pyflakes'
 ]
