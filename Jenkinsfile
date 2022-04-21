@@ -14,13 +14,14 @@ pipeline {
         stage('Deploy') { 
             steps {
                 sh 'ssh -o StrictHostKeyCHecking=no nutrixadmin@20.212.130.228 "source env/bin/activate; \
-                cd nutrix-backend \
-                git pull origin master; \
-                pip install -r requirements.txt --no-warn-script-location; \
-                python manage.py migrate; \
-                deactivate; \
-                sudo systemctl restart nginx; \
-                sudo systemctl restart gunicon " '
+                echo 'hello' " '
+                // cd nutrix-backend \
+                // git pull origin master; \
+                // pip install -r requirements.txt --no-warn-script-location; \
+                // python manage.py migrate; \
+                // deactivate; \
+                // sudo systemctl restart nginx; \
+                // sudo systemctl restart gunicon " '
             }
         }
     }
