@@ -9,7 +9,7 @@ USER_ROLE = (
     ('Nurse', 'Nurse'),
     ('Nutritionist', 'Nutritionist'),
     ('Patient', 'Patient'),
-    ('Admin', 'Admin'),
+    ('Labeller', 'Labeller'),
 )
 
 USER_STATUS = (
