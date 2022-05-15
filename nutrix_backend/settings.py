@@ -147,6 +147,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 
+if not DEBUG:
+    AZURE_CONNECTION_STRING = "DefaultEndpointsProtocol=https;AccountName=foodimage;AccountKey=6sfR/84dFPH424lGlbNbDXlOjPQ/RJ+LDSjvZ8aG1N0pMFjEHaMQ4T7Qa1Eg9dzOSFy/pv+XZuQiZRQh6WeHmw==;EndpointSuffix=core.windows.net"
+    AZURE_CONTAINER = 'labelimages'  # Container or File System Name
+    DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
