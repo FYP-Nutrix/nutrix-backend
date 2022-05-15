@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+
     'rest_framework',
     'rest_framework.authtoken',
     'user',
+    'food_label',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +75,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'nutrix_backend.wsgi.application'
+# django form template
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -87,6 +92,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'user.Account'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request):
@@ -21,7 +22,8 @@ class UserRecordView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, format=None):
-        users = User.objects.all()
+        users = get_user_model()
+        # User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
