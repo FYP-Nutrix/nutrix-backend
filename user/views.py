@@ -1,12 +1,13 @@
+from importlib.resources import contents
 from os import stat
 from django.shortcuts import render
+from user.models import Account
 from user.serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 def index(request):
@@ -19,11 +20,10 @@ class UserRecordView(APIView):
     POST request will allow to create a new users
     """
 
-    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, format=None):
         users = get_user_model()
-        # User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
@@ -31,6 +31,7 @@ class UserRecordView(APIView):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(validated_data=request.data)
+            user = serializer.validated_data['email']
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
