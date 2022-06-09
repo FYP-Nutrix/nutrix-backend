@@ -3,11 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 # Create your models here.
 USER_ROLE = (
-    ('Doctor', 'Doctor'),
-    ('Nurse', 'Nurse'),
     ('Nutritionist', 'Nutritionist'),
-    ('Patient', 'Patient'),
-    ('Labeller', 'Labeller'),
+    ('Patient', 'Patient')
 )
 
 USER_STATUS = (
