@@ -29,9 +29,7 @@ class UserRecordView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validated_data=request.data)
-            serializer.validated_data
-            serializer.save()
+            serializer.create(validated_data=request.data) # create data
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
