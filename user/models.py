@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -55,7 +56,7 @@ class AccountManager(BaseUserManager):
 
 # class for data storage
 class Account(AbstractBaseUser, PermissionsMixin):
-    # account_id = models.UUIDField(unique=True, default=uuid.uuid4, null=False)
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     first_name = models.CharField(max_length=50, default="NAN")
     last_name = models.CharField(max_length=50, default="NAN")
     phone_number = models.CharField(max_length=11, default="NAN")
