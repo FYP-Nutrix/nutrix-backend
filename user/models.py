@@ -1,15 +1,11 @@
 import uuid
-from django.contrib.auth import default_app_config
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
 USER_ROLE = (
-    ('Doctor', 'Doctor'),
-    ('Nurse', 'Nurse'),
     ('Nutritionist', 'Nutritionist'),
-    ('Patient', 'Patient'),
-    ('Labeller', 'Labeller'),
+    ('Patient', 'Patient')
 )
 
 USER_STATUS = (
@@ -60,9 +56,10 @@ class AccountManager(BaseUserManager):
 
 # class for data storage
 class Account(AbstractBaseUser, PermissionsMixin):
-    account_id = models.UUIDField(primary_key=True, default=uuid.uuid4, null=False)
-    name = models.CharField(max_length=50, default="NAN")
-    phone_no = models.CharField(max_length=11, default="NAN")
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
+    first_name = models.CharField(max_length=50, default="NAN")
+    last_name = models.CharField(max_length=50, default="NAN")
+    phone_number = models.CharField(max_length=11, default="NAN")
     email = models.EmailField(max_length=50, unique=True)
     role = models.CharField(choices=USER_ROLE, max_length=50)
     profile_pic = models.ImageField(default="undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
@@ -72,7 +69,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = None
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password', 'role', 'name', 'phone_number']
+    REQUIRED_FIELDS = ['password', 'role', 'first_name', 'last_name', 'phone_number']
 
     # class for creation
     objects = AccountManager()

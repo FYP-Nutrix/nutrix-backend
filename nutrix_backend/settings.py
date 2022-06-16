@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 import os
 
@@ -41,12 +42,14 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'corsheaders',
     'user',
     'food_label',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'nutrix_backend.urls'
-
+APPEND_SLASH=False
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -89,7 +92,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -110,15 +112,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication'
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.AllowAny'
     ],
 }
 
+SIMPLE_JWT = {
+    # 'AUTH_HEADER_TYPES': ('JWT'),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=5),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
