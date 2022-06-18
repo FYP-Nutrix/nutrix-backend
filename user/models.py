@@ -48,6 +48,7 @@ class AccountManager(BaseUserManager):
         )
 
         user.is_superuser = True
+        user.is_staff = True
         user.is_active = True
         user.status = True
 
@@ -65,8 +66,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     profile_pic = models.ImageField(default="undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now=True)
-
-    is_staff = None
+    is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password', 'role', 'first_name', 'last_name', 'phone_number']

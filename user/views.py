@@ -3,10 +3,9 @@ from user.serializers import UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from user.models import Account
 
 # Create your views here.
 def index(request):
@@ -21,7 +20,7 @@ class UserRecordView(APIView):
 
     @authentication_classes([JWTAuthentication])
     def get(self, format=None):
-        users = get_user_model()
+        users = Account.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
