@@ -58,9 +58,9 @@ class AccountManager(BaseUserManager):
 # class for data storage
 class Account(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
-    first_name = models.CharField(max_length=50, default="NAN")
-    last_name = models.CharField(max_length=50, default="NAN")
-    phone_number = models.CharField(max_length=11, default="NAN")
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=11)
     email = models.EmailField(max_length=50, unique=True)
     role = models.CharField(choices=USER_ROLE, max_length=50)
     profile_pic = models.ImageField(default="undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
