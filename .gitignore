@@ -194,4 +194,4 @@ target/
 .ropeproject
 
 #migration
-.migrations/
+**/migrations/**
