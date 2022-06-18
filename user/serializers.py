@@ -12,14 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = (
-            'first_name',
-            'last_name',
-            'email',
-            'password',
-            'phone_number',
-            'role'
-        )
+        fields = '__all__'
         validators = [
             UniqueTogetherValidator(
                 queryset=get_user_model().objects.all(),
