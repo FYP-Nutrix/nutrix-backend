@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from user.serializers import UserSerializer
 from rest_framework.views import APIView
@@ -11,7 +12,7 @@ from user.models import Account
 def index(request):
     return render(request,"index.html")
 
-class UserRecordView(APIView):
+class UserList(APIView):
     """
     API View to create or get a list of all the registered users.
     Get request will returns the registered users
@@ -41,3 +42,33 @@ class UserRecordView(APIView):
             },
             status=status.HTTP_400_BAD_REQUEST
         )
+
+class UserDetails(APIView):
+    """
+    Retrieve, update or delete a user instance.
+    Documentation URL: https://www.django-rest-framework.org/tutorial/3-class-based-views/
+    """
+
+    def get_object(self, pk):
+        try :
+            return Account.objects.get(pk=pk)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk , format=None):
+        user = self.get_object(pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
