@@ -66,3 +66,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     # class for creation
     objects = AccountManager()
+
+class MealSetting(Account):
+    daily_calories = models.DecimalField(max_digits=7, decimal_places=3, null=True)
