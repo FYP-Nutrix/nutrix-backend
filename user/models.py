@@ -3,17 +3,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
-USER_ROLE = (
-    ('Nutritionist', 'Nutritionist'),
-    ('Patient', 'Patient')
-)
-
-USER_STATUS = (
-    ('Approved', 'Approved'),
-    ('Declined', 'Declined'),
-    ('Pending', 'Pending'),
-)
-
 class AccountManager(BaseUserManager):
     def create_user(self, email, password, role, first_name, last_name, phone_number):
 
@@ -56,17 +45,21 @@ class AccountManager(BaseUserManager):
         return user
 
 # class for data storage
+# is patient : to identify the user is a patient
+# is nutritionist : to identify the user is a nutrition
+# is staff and is super user are admin and able to access django admin
 class Account(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11)
     email = models.EmailField(max_length=50, unique=True)
-    role = models.CharField(choices=USER_ROLE, max_length=50)
     profile_pic = models.ImageField(default="undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)
+    is_patient = models.BooleanField(default=False)
+    is_nutritionist = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['password', 'role', 'first_name', 'last_name', 'phone_number']
