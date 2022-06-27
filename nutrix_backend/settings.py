@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'food_label',
     'meal',
+    'nutrition'
 ]
 
 MIDDLEWARE = [
