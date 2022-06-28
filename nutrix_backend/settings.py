@@ -34,18 +34,18 @@ ALLOWED_HOSTS = ['*','0.0.0.0']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'user',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'crispy_forms',
-
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
-    'user',
     'food_label',
+    'meal',
+    'nutrition'
 ]
 
 MIDDLEWARE = [
