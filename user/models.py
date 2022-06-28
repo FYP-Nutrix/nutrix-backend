@@ -68,7 +68,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_nutritionist = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password', 'role', 'first_name', 'last_name', 'phone_number']
+    REQUIRED_FIELDS = ['password', 'first_name', 'last_name', 'phone_number']
 
     # class for creation
     objects = AccountManager()
