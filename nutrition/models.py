@@ -21,6 +21,7 @@ class Nutrition(models.Model):
     calorie_per_serving = models.IntegerField()
     serving_size = models.DecimalField(max_digits=7, decimal_places=2)
     serving_type = models.CharField(max_length=255)
+    serving_gram = models.DecimalField(max_digits=7, decimal_places=2)
 
 class NutritionLogging(models.Model):
     nutrition_logging_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
