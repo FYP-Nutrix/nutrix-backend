@@ -192,6 +192,3 @@ target/
 
 # Vim
 .ropeproject
-
-#migration
-**/migrations/**
