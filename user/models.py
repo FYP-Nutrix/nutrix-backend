@@ -73,5 +73,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     # class for creation
     objects = AccountManager()
 
-class MealSetting(Account):
+class MealSetting(models.Model):
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
     daily_calories = models.DecimalField(max_digits=7, decimal_places=3, null=True)

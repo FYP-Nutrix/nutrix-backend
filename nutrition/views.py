@@ -1,3 +1,4 @@
+from django.http import Http404
 from nutrition.models import Nutrition
 from nutrition.serializers import NutritionSerializer
 from rest_framework.views import APIView
@@ -32,3 +33,33 @@ class NutritionList(APIView):
             },
             status=status.HTTP_400_BAD_REQUEST
         )
+
+class NutritionDetails(APIView):
+    """
+    Retrieve, update or delete a nutrition instance.
+    Documentation URL: https://www.django-rest-framework.org/tutorial/3-class-based-views/
+    """
+
+    def get_object(self, pk):
+        try :
+            return Nutrition.objects.get(pk=pk)
+        except Nutrition.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = NutritionSerializer(user)
+        return Response(serializer.data)
+    
+    def put(self, request, pk, format=None):
+        user = self.get_object(pk)
+        serializer = NutritionSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk , format=None):
+        user = self.get_object(pk)
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

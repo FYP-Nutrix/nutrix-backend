@@ -7,6 +7,8 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('user/', UserList.as_view(), name='UserList'),
     path('user/<uuid:pk>/', views.UserDetails.as_view()),
+    path('meal-setting/', views.MealSettingList.as_view(), name='MealSettingList'),
+    path('meal-setting/<uuid:pk>/', views.MealSettingDetails.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
