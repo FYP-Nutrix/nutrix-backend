@@ -73,7 +73,7 @@ class NutritionLogList(APIView):
 
     def get(self, format=None):
         nutritions = NutritionLogging.objects.all()
-        serializer = NutritionSerializer(nutritions, many=True)
+        serializer = NutritionLogSerializer(nutritions, many=True)
         return Response(serializer.data)
 
     def post(self, request):
