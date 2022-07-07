@@ -11,7 +11,7 @@ class MealSettingSerializer(serializers.ModelSerializer):
         fields = ['id', 'account', 'daily_calories',]
 
 class UserSerializer(serializers.ModelSerializer):
-    daily_calories = MealSettingSerializer(required=False)
+    daily_calories = MealSettingSerializer(required=True)
 
     class Meta:
         model = Account
