@@ -1,3 +1,4 @@
+from urllib import request
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 from django.contrib.auth import get_user_model
@@ -12,6 +13,7 @@ class MealSettingSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     daily_calories = MealSettingSerializer(required=False)
+    password = serializers.CharField(required=False)
 
     class Meta:
         model = Account
