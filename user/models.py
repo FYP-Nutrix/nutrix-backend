@@ -55,12 +55,12 @@ class AccountManager(BaseUserManager):
 # is nutritionist : to identify the user is a nutrition
 # is staff and is super user are admin and able to access django admin
 class Account(AbstractBaseUser, PermissionsMixin):
-    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
+    user_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11)
     email = models.EmailField(max_length=50, unique=True)
-    profile_pic = models.ImageField(default="undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
+    profile_pic = models.ImageField(default="img/undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)

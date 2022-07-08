@@ -9,7 +9,7 @@ class MealSettingSerializer(serializers.ModelSerializer):
 
     class Meta: 
         model = MealSetting
-        fields = ['id', 'account', 'daily_calories',]
+        fields = ['user_id', 'account', 'daily_calories',]
 
 class UserSerializer(serializers.ModelSerializer):
     daily_calories = MealSettingSerializer(required=False)
