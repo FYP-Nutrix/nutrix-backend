@@ -55,7 +55,7 @@ class AccountManager(BaseUserManager):
 # is nutritionist : to identify the user is a nutrition
 # is staff and is super user are admin and able to access django admin
 class Account(AbstractBaseUser, PermissionsMixin):
-    user_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11)
