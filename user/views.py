@@ -96,7 +96,6 @@ class MealSettingList(APIView):
         serializer = MealSettingSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.save()
-            print(serializer.validated_data)
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
@@ -128,6 +127,8 @@ class MealSettingDetails(APIView):
     
     def put(self, request, pk, format=None):
         user = self.get_object(pk)
+        if request.data['advice'] == '':
+            request.data['advice'] = None
         serializer = MealSettingSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
