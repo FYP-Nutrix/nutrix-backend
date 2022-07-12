@@ -116,7 +116,7 @@ class MealSettingDetails(APIView):
 
     def get_object(self, pk):
         try :
-            return MealSetting.objects.get(pk=pk)
+            return MealSetting.objects.get(account=pk)
         except MealSetting.DoesNotExist:
             raise Http404
 
