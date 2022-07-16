@@ -27,4 +27,3 @@ class NutritionLogging(models.Model):
     nutrition_logging_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
     meal_image = models.ForeignKey(MealImage, on_delete=models.CASCADE)
     nutrition = models.ForeignKey(Nutrition, on_delete=models.CASCADE)
-    meal_size = models.DecimalField(max_digits=7, decimal_places=2)
