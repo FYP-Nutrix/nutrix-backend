@@ -12,6 +12,7 @@ class MealImage(models.Model):
     image_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     meal_image = models.ImageField(null=False, upload_to="meal_logging")
     total_calorie = models.IntegerField()
+    meal_size = models.DecimalField(max_digits=7, decimal_places=2)
 
 # meal type for user to choose for each entry
 MEAL_TYPE = [
