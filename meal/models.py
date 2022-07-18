@@ -30,3 +30,7 @@ class MealLogging(models.Model):
     meal_type = models.CharField(choices=MEAL_TYPE, max_length=20)
     datetime = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+    def __str__(self):
+        naming = self.user.email + " " + self.meal_type
+        return naming
