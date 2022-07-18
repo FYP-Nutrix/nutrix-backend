@@ -1,37 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtccbapps
+  name: nutrixapps
   namespace: ingress-basic
   labels:
-    app: mtccbapps
+    app: nutrixapps
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mtccbapps
+      app: nutrixapps
   template:
     metadata:
       labels:
-        app: mtccbapps
+        app: nutrixapps
     spec:
       containers:
-        - name: mtccbapps
-          # Replace  with your project ID or use `make template`
-          image: acrspuat.azurecr.io/mtccbapps:latest
-          # This setting makes nodes pull the docker image every time before
-          # starting the pod. This is useful when debugging, but should be turned
-          # off in production.
+        - name: nutrixapps
+          image: nutrix.azurecr.io/nutrix-backend:latest
           imagePullPolicy: Always
-          env:
-            - name: POSTGRES_HOST
-              value: 20.78.121.41
-            - name: POSTGRES_DB
-              value: mt
-            - name: POSTGRES_USER
-              value: mtccbadmin
-            - name: POSTGRES_PASSWORD
-              value: mtccbadmin@123
-            # [END cloudsql_secrets]
           ports:
             - containerPort: 8080

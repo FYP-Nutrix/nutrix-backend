@@ -83,7 +83,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_POSTGRES = False
+DATABASE_POSTGRES = True
 
 if DATABASE_POSTGRES == True: 
     DATABASES = {
