@@ -1,26 +1,42 @@
 version: "3.9"
-   
 services:
   db:
     image: postgres
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    container_name: nutrix-postgres
     environment:
       POSTGRES_DB: postgres
-      POSTGRES_USER: nutrix_admin
+      POSTGRES_USER: nutrix-admin
       POSTGRES_PASSWORD: Password1
   web:
     build: .
     image: nutrix.azurecr.io/nutrix-backend
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: nutrix-backend
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
-    environment:
-      POSTGRES_NAME: postgres
-      POSTGRES_USER: nutrix_admin
-      POSTGRES_PASSWORD: Password1
-      POSTGRES_DB: nutrix-postgres.postgres.database.azure.com
     depends_on:
       - db
+
+# Local Host Environment
+# version: "3.9"
+# services:
+#   db:
+#     image: postgres
+#     environment:
+#       POSTGRES_DB: postgres
+#       POSTGRES_USER: nutrix-admin
+#       POSTGRES_PASSWORD: Password1
+#   web:
+#     build: .
+#     image: nutrix.azurecr.io/nutrix-backend
+#     command: python manage.py runserver 0.0.0.0:8000
+#     volumes:
+#       - .:/code
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       POSTGRES_NAME: postgres
+#       POSTGRES_USER: nutrix_admin
+#       POSTGRES_PASSWORD: Password1
+#       POSTGRES_DB: nutrix-postgres.postgres.database.azure.com
+#     depends_on:
+#       - db

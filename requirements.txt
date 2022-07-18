@@ -1,7 +1,6 @@
 asgiref==3.5.2
 azure-core==1.24.2
 azure-storage-blob==12.13.0
-backports.zoneinfo==0.2.1
 certifi==2022.6.15
 cffi==1.15.1
 charset-normalizer==2.1.0
