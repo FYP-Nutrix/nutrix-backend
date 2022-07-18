@@ -23,6 +23,9 @@ class Nutrition(models.Model):
     serving_type = models.CharField(max_length=255)
     serving_gram = models.DecimalField(max_digits=7, decimal_places=2)
 
+    def __str__(self):
+        return self.meal_name
+
 class NutritionLogging(models.Model):
     nutrition_logging_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4)
     meal_image = models.ForeignKey(MealImage, on_delete=models.CASCADE)

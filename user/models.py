@@ -73,8 +73,14 @@ class Account(AbstractBaseUser, PermissionsMixin):
     # class for creation
     objects = AccountManager()
 
+    def __str__(self):
+        return self.email
+
 class MealSetting(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     daily_calories = models.DecimalField(max_digits=7, decimal_places=3, null=True)
     advice = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return self.account.email
