@@ -70,6 +70,11 @@ class MealLogList(APIView):
     API View to create or get a list of all the meal log.
     Get request will returns the meal log
     POST request will allow to create a new meal log
+    AI API Endpoint is here : 
+    https://nutrifitai-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/f796fbfd-a4dd-473f-918a-2716ed03620c/detect/iterations/Iteration6/image
+    Header :
+    Prediction-Key 9af3ccfe487d4987aaf96fb84f2da07e
+    Content-Type application/octet-stream
     """
 
     def get(self, format=None):
@@ -81,6 +86,10 @@ class MealLogList(APIView):
         serializer = MealLogSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.save() # create data
+            # get the meal image
+            # declare the header payload
+            # put inside the payload of body
+            # run it
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
