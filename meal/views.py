@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from user.models import Account
+
 # Create your views here.
 class MealImageList(APIView):
     """
@@ -131,3 +133,18 @@ class MealLogDetails(APIView):
         user = self.get_object(pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class MealPatientLogList(APIView):
+    def get_object(self,pk):
+        try:
+            patient = Account.objects.get(id=pk)
+            return MealLogging.objects.filter(user = patient)
+        except MealLogging.DoesNotExist:
+            raise Http404
+    
+    def get(self, request, pk, format=None):
+        # meal_logging = self.get_object(pk)
+        patient = Account.objects.get(id=pk)
+        meal_logging = MealLogging.objects.filter(user = patient)
+        serializer = MealLogSerializer(meal_logging, many=True)
+        return Response(serializer.data)
