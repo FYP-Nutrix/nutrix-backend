@@ -6,6 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from user.models import Account
+
 # Create your views here.
 class MealImageList(APIView):
     """
@@ -70,6 +72,11 @@ class MealLogList(APIView):
     API View to create or get a list of all the meal log.
     Get request will returns the meal log
     POST request will allow to create a new meal log
+    AI API Endpoint is here : 
+    https://nutrifitai-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/f796fbfd-a4dd-473f-918a-2716ed03620c/detect/iterations/Iteration6/image
+    Header :
+    Prediction-Key 9af3ccfe487d4987aaf96fb84f2da07e
+    Content-Type application/octet-stream
     """
 
     def get(self, format=None):
@@ -81,6 +88,10 @@ class MealLogList(APIView):
         serializer = MealLogSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.save() # create data
+            # get the meal image
+            # declare the header payload
+            # put inside the payload of body
+            # run it
             return Response(
                 serializer.data,
                 status=status.HTTP_201_CREATED
@@ -122,3 +133,18 @@ class MealLogDetails(APIView):
         user = self.get_object(pk)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class MealPatientLogList(APIView):
+    def get_object(self,pk):
+        try:
+            patient = Account.objects.get(id=pk)
+            return MealLogging.objects.filter(user = patient)
+        except MealLogging.DoesNotExist:
+            raise Http404
+    
+    def get(self, request, pk, format=None):
+        # meal_logging = self.get_object(pk)
+        patient = Account.objects.get(id=pk)
+        meal_logging = MealLogging.objects.filter(user = patient)
+        serializer = MealLogSerializer(meal_logging, many=True)
+        return Response(serializer.data)

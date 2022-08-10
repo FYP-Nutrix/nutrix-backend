@@ -30,6 +30,7 @@ class MealLogging(models.Model):
 class MealImage(models.Model):
     image_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, null=False)
     meal_image = models.ImageField(null=False, upload_to="meal_logging")
+    meal_name = models.CharField(max_length=100, null=True)
     total_calorie = models.IntegerField(null=True)
     meal_size = models.DecimalField(max_digits=7, decimal_places=2,null=True)
     meal_logging = models.ForeignKey(MealLogging, related_name='meal_image',on_delete=models.CASCADE)
