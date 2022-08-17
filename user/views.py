@@ -127,8 +127,8 @@ class MealSettingDetails(APIView):
     
     def put(self, request, pk, format=None):
         user = self.get_object(pk)
-        if request.data['advice'] == '':
-            request.data['advice'] = None
+        # if request.data['advice'] == '':
+        #     request.data['advice'] = None
         serializer = MealSettingSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
