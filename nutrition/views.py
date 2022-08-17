@@ -1,4 +1,6 @@
+from re import search
 from django.http import Http404
+from meal.models import MealImage
 from nutrition.models import Nutrition, NutritionLogging
 from nutrition.serializers import NutritionLogSerializer, NutritionSerializer
 from rest_framework.views import APIView
@@ -91,3 +93,19 @@ class NutritionLogList(APIView):
             },
             status=status.HTTP_400_BAD_REQUEST
         )
+
+class NutritionLogDetails(APIView):
+
+    def get_object(self,pk):
+        try:
+            imageobj = MealImage.objects.get(image_id=pk)
+            return NutritionLogging.objects.get(meal_image=imageobj)
+        except NutritionLogging.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        data = self.get_object(pk)
+        serializer = NutritionLogSerializer(data)
+        # nutrition_logging_data = NutritionLogging.objects.get(meal_image=imageobj)
+        # serializer = NutritionLogSerializer(nutrition_logging_data, many=True)
+        return Response(serializer.data)
