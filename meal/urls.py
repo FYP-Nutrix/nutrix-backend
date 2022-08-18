@@ -9,6 +9,7 @@ urlpatterns = [
     path('meal-log/', MealLogList.as_view(), name='MealLogList'),
     path('meal-log/<uuid:pk>/', MealLogDetails.as_view(), name='MealLogDetails'),
     path('meal-log/patient/<uuid:pk>/', views.MealPatientLogList.as_view(), name='MealPatientLogList'),
+    path('meal-log/patient-calorie/<uuid:pk>/', views.MealPatientDetails.as_view(), name='MealPatientDetails'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
