@@ -20,14 +20,17 @@ def generate_nutrition(sender, **kwargs):
         instance = kwargs['instance']
         # use the instance meal name to find the food name in nutrition table
         new_meal_name = instance.meal_name
-        nutrition_info = Nutrition.objects.get(meal_name=new_meal_name)
-        print(nutrition_info.fiber)
-        # to get back the previous meal information entry
-        meal_image_id = instance.image_id
-        meal_image_obj = MealImage.objects.get(image_id=meal_image_id)
-        data = NutritionLogging(meal_image=meal_image_obj,nutrition=nutrition_info)
-        data.save()
-        print("data is saved")
+        try:
+            nutrition_info = Nutrition.objects.get(meal_name=new_meal_name)
+            print(nutrition_info.fiber)
+            # to get back the previous meal information entry
+            meal_image_id = instance.image_id
+            meal_image_obj = MealImage.objects.get(image_id=meal_image_id)
+            data = NutritionLogging(meal_image=meal_image_obj,nutrition=nutrition_info)
+            data.save()
+        except Nutrition.DoesNotExist:
+
+            print("no data")
 
     else :
         print("something is wrong")

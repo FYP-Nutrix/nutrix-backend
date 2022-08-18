@@ -31,6 +31,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = Account.objects.create(**validated_data)
         user.set_password(validated_data.get('password'))
         user.save()
-        if (validated_data.get('is_patient') == True):
-            MealSetting.objects.create(account=user, **daily_calories)
+
+        MealSetting.objects.create(account=user, **daily_calories)
+        
         return user
