@@ -60,7 +60,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=11)
     email = models.EmailField(max_length=50, unique=True)
-    profile_pic = models.ImageField(default="img/undraw_profile.svg", null=True, blank=True, upload_to="img/profile")
+    profile_pic = models.ImageField(default="img/default_pic.jpg", null=True, blank=True, upload_to="img/profile")
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)
