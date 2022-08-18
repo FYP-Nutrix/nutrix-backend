@@ -23,7 +23,6 @@ class NutritionLogSerializer(serializers.ModelSerializer):
         for nut in nutritions:
             for m in meal:
                 if nut.meal_name == m.meal_name:
-                    print(nut.meal_name)
                     meal_image = MealImage.objects.get(meal_name=m.meal_name)
                     nutrition = Nutrition.objects.get(meal_name=nut.meal_name)
                     nut_log = NutritionLogging.objects.create(meal_image=meal_image, nutrition=nutrition)
