@@ -1,10 +1,11 @@
 from django.http import Http404
 from django.shortcuts import render
 from meal.models import MealImage, MealLogging
-from meal.serializers import MealImageSerializer, MealLogSerializer
+from meal.serializers import MealImageSerializer, MealLogSerializer, MealPatientCalorieSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Sum
 
 from user.models import Account
 
@@ -148,3 +149,9 @@ class MealPatientLogList(APIView):
         meal_logging = MealLogging.objects.filter(user = patient)
         serializer = MealLogSerializer(meal_logging, many=True)
         return Response(serializer.data)
+
+class MealPatientDetails(APIView):
+    def get(self, request, pk, format=None):
+        serializer = MealPatientCalorieSerializer.get_patient_total_calorie(pk)
+        print(serializer)
+        return Response(serializer)

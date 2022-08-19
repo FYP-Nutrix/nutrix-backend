@@ -15,6 +15,7 @@ def generate_nutrition(sender, **kwargs):
             # to get back the previous meal information entry
             meal_image_id = instance.image_id
             meal_image_obj = MealImage.objects.get(image_id=meal_image_id)
+            # meal_calorie = MealImage.objects.filter(image_id=meal_image_id).update(total_calorie=(nutrition_info.calorie_per_serving*meal_image_obj.meal_size))
             data = NutritionLogging(meal_image=meal_image_obj,nutrition=nutrition_info)
             data.save()
         except Nutrition.DoesNotExist:
