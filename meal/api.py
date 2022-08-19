@@ -17,6 +17,5 @@ def requestImageName(food_image):
 
     data = response.json()
     food_name = data['predictions'][0]['tagName']
-    print(food_name)
     
     return food_name

@@ -24,7 +24,6 @@ class MealLogSerializer(serializers.ModelSerializer):
         meal_log = MealLogging.objects.create(**validated_data)
         for meal_image in meal_image:
             image_url = meal_image['meal_image']
-            print("meal image",image_url)
             food_name = requestImageName(image_url)
             meal_image = MealImage.objects.create(meal_logging=meal_log, **meal_image, meal_name=food_name)
         return meal_log
